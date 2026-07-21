@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meridian Systems — Civic Portal</title>
+<style>
+:root{--bg:#061426;--panel:#0b223c;--blue:#58d7ff;--white:#f4f8fb;--muted:#9eb2c4;--line:rgba(88,215,255,.28);--good:#8bffc3;--warn:#ffd67d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--white);background:radial-gradient(circle at top,rgba(73,190,255,.2),transparent 35rem),linear-gradient(#071b31,#020811);font-family:Inter,system-ui,sans-serif}
+.wrap{width:min(1100px,calc(100% - 24px));margin:auto;padding:16px 0 50px}
+.top{position:sticky;top:8px;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border:1px solid var(--line);background:rgba(4,15,28,.9);backdrop-filter:blur(12px)}
+.brand{font-weight:900;letter-spacing:.08em}.brand span{color:var(--blue)}.status{font:700 .72rem ui-monospace;color:var(--good)}
+.hero{min-height:75vh;display:grid;place-items:center;text-align:center;padding:60px 12px}.hero>div{max-width:820px}
+h1{margin:0;font-size:clamp(3rem,10vw,7rem);line-height:.92;letter-spacing:-.07em;text-transform:uppercase}h1 span{color:var(--blue)}
+.hero p{max-width:700px;margin:24px auto 0;color:#d9e5ee;line-height:1.75}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.btn{border:1px solid var(--blue);background:var(--blue);color:#03101d;min-height:46px;padding:0 18px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.btn.alt{background:transparent;color:var(--white);border-color:rgba(255,255,255,.26)}.btn.small{min-height:39px;font-size:.76rem;padding:0 13px}
+.note{margin-top:18px;color:var(--muted);font-size:.73rem;line-height:1.55}
+.section{margin-top:30px;border:1px solid var(--line);background:rgba(9,29,51,.93)}
+.head{padding:18px;border-bottom:1px solid var(--line)}.head h2{margin:0;text-transform:uppercase;font-size:clamp(1.4rem,4vw,2.1rem)}.head p{margin:8px 0 0;color:var(--muted);line-height:1.6}
+.body{padding:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.025);padding:16px}.tag{color:var(--blue);font:700 .7rem ui-monospace;letter-spacing:.1em;text-transform:uppercase}
+.card h3{margin:9px 0 8px}.card p,.card li{color:var(--muted);font-size:.84rem;line-height:1.55}.card ul{padding-left:18px}
+.timeline{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.day{border:1px solid rgba(255,255,255,.11);padding:12px;min-height:160px}.day b{font-size:1.9rem;color:var(--blue)}.day h3{font-size:.86rem;margin:10px 0 7px}.day p{font-size:.72rem;color:var(--muted);line-height:1.5;margin:0}
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.metric{text-align:center;border:1px solid rgba(255,255,255,.11);padding:20px}.metric strong{display:block;color:#a7ebff;font-size:2.2rem}.metric span{font-size:.72rem;color:var(--muted);text-transform:uppercase}
+fieldset{border:1px solid rgba(255,255,255,.12);margin:0 0 14px;padding:14px}legend{font-weight:900;padding:0 6px}.choice{display:block;border:1px solid rgba(255,255,255,.12);padding:11px;margin-top:8px;color:var(--muted)}.choice input{margin-right:8px}
+input[type=text]{width:100%;padding:13px;background:#03101d;border:1px solid var(--blue);color:white}.hidden{display:none!important}
+.credential{grid-column:span 2;border:1px solid var(--blue);padding:18px;background:rgba(88,215,255,.055)}.citizen{font:900 clamp(1.5rem,5vw,2.5rem) ui-monospace;color:#a7ebff;word-break:break-word}
+.info{display:grid;grid-template-columns:130px 1fr;gap:8px;margin-top:16px}.info div:nth-child(odd){color:var(--muted)}
+.progress{height:10px;border:1px solid rgba(255,255,255,.2);margin-top:18px}.bar{height:100%;width:0;background:linear-gradient(90deg,#277ea6,var(--blue))}.row{display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted);margin-top:7px}
+.done{border-color:rgba(139,255,195,.5)!important}.report{display:none;margin-top:12px;border:1px solid rgba(139,255,195,.4);color:var(--good);padding:12px}
+.archive{font: .76rem/1.75 ui-monospace;color:#9ab0c1;border:1px solid rgba(255,255,255,.1);padding:16px;background:rgba(0,0,0,.18)}.redact{display:inline-block;width:95px;height:.8em;background:#02070c}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;background:#061426;border:1px solid var(--blue);padding:11px 15px;transition:.2s;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#71889b;font-size:.68rem;line-height:1.6;margin-top:28px}
+@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:1fr 1fr}.metric-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.grid,.timeline,.metric-grid{grid-template-columns:1fr}.credential{grid-column:span 1}.info{grid-template-columns:1fr}.status{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand">MERIDIAN <span>SYSTEMS</span> // CIVIC PORTAL</div><div class="status">● CONTINUITY NETWORK ACTIVE</div></header>
+
+<section class="hero"><div>
+<div class="tag">Global continuity authority // Public access</div>
+<h1>The future remains <span>online.</span></h1>
+<p>Meridian restored communication, identity, healthcare, transportation, and financial continuity. Together, we ensure civilization never faces an eighth day.</p>
+<div class="actions"><button class="btn" id="startBtn">Begin Civic Assessment</button><button class="btn alt" id="dashBtn">Open Dashboard</button></div>
+<div class="note">Use a fictional designation only. This V1 stores progress locally on your device.</div>
+</div></section>
+
+<section class="section"><div class="head"><h2>The official restoration record</h2><p>In the year 23XX, the Seven-Day Catastrophe disabled the systems civilization depended on.</p></div>
+<div class="body"><div class="timeline">
+<div class="day"><b>01</b><h3>The Silence</h3><p>Communication networks stopped.</p></div>
+<div class="day"><b>02</b><h3>The Freeze</h3><p>Financial verification failed.</p></div>
+<div class="day"><b>03</b><h3>The Missing</h3><p>Identity systems vanished.</p></div>
+<div class="day"><b>04</b><h3>The Collapse</h3><p>Healthcare and transport failed.</p></div>
+<div class="day"><b>05</b><h3>The Fracture</h3><p>Governments lost coordination.</p></div>
+<div class="day"><b>06</b><h3>The Request</h3><p>States requested Meridian aid.</p></div>
+<div class="day"><b>07</b><h3>The Restoration</h3><p>The Continuity Grid activated.</p></div>
+</div></div></section>
+
+<section class="section"><div class="head"><h2>Continuity at scale</h2><p>Certified public indicators under the Global Continuity Accord.</p></div>
+<div class="body"><div class="metric-grid">
+<div class="metric"><strong>193</strong><span>Member states</span></div>
+<div class="metric"><strong>99.97%</strong><span>Uptime target</span></div>
+<div class="metric"><strong>8.4B</strong><span>Identities protected</span></div>
+<div class="metric"><strong>0</strong><span>Acceptable days offline</span></div>
+</div></div></section>
+
+<section class="section"><div class="head"><h2>Civic departments and careers</h2><p>Assessment determines department placement and initial assignment.</p></div><div class="body"><div class="grid" id="departments"></div></div></section>
+
+<section class="section hidden" id="assessment"><div class="head"><h2>Civic aptitude assessment</h2><p>Your decisions determine your department and position.</p></div>
+<div class="body"><form id="form">
+<fieldset><legend>Preferred civic designation</legend><input id="alias" type="text" maxlength="24" placeholder="Example: ORION" required><p class="note">Do not use your legal name.</p></fieldset>
+<div id="questions"></div><button class="btn" type="submit">Issue Credentials</button>
+</form></div></section>
+
+<section class="section hidden" id="dashboard"><div class="head"><h2>Citizen service dashboard</h2><p>Complete simulated civic assignments to improve trust status.</p></div>
+<div class="body">
+<div class="grid"><div class="credential"><div class="tag">Verified civic credential</div><div class="citizen" id="citizenId"></div>
+<div class="info"><div>Designation</div><div id="outAlias"></div><div>Department</div><div id="outDept"></div><div>Position</div><div id="outJob"></div><div>Trust status</div><div id="outRank"></div><div>Access</div><div style="color:var(--good)">VERIFIED</div></div>
+<div class="progress"><div class="bar" id="bar"></div></div><div class="row"><span id="rankLabel"></span><span id="xpLabel"></span></div></div>
+<article class="card"><div class="tag">Service function</div><h3 id="jobTitle"></h3><p id="jobDesc"></p></article></div>
+<h3>Initial civic assignments</h3><div class="grid" id="missions"></div>
+<div class="actions" style="justify-content:flex-start"><button class="btn small" id="copyBtn">Copy Credentials</button><button class="btn small alt" id="resetBtn">Remove Record</button></div>
+</div></section>
+
+<section class="section"><div class="head"><h2>Public continuity reporting</h2><p>Report unusual fictional activity for local review.</p></div><div class="body">
+<input id="reportText" type="text" maxlength="140" placeholder="Describe a fictional anomaly"><div class="actions" style="justify-content:flex-start"><button class="btn" id="reportBtn">Submit Report</button></div><div class="report" id="reportOut"></div>
+</div></section>
+
+<section class="section"><div class="head"><h2>Public archive access</h2><p>Approved records are available for civic-confidence purposes.</p></div><div class="body">
+<div class="archive"><b>RESTORATION ARCHIVE INDEX</b><br>
+RECORD_01 — VERIFIED // COMMUNICATION FAILURE<br>
+RECORD_02 — VERIFIED // FINANCIAL LOCKDOWN<br>
+RECORD_03 — VERIFIED // IDENTITY COLLAPSE<br>
+RECORD_04 — VERIFIED // INFRASTRUCTURE FAILURE<br>
+RECORD_05 — VERIFIED // GOVERNMENT FRAGMENTATION<br>
+RECORD_06 — VERIFIED // GLOBAL RESTORATION<br>
+RECORD_07 — <span class="redact"></span> // PUBLIC ACCESS RESTRICTED<br><br>
+Restriction authority: <b>M-0</b><br>Reason: continuity confidence preservation.</div>
+</div></section>
+
+<footer><b>MERIDIAN SYSTEMS is a fictional interactive story.</b><br>This V1 uses browser storage only and sends no information to a server.</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const D={
+security:{code:"SEC",name:"Civic Security",summary:"Protects infrastructure from digital threats and unauthorized access.",jobs:[["Network Compliance Officer","Reviews activity that may endanger continuity."],["Digital Threat Investigator","Examines suspicious signals and access patterns."],["Public Safety Analyst","Assesses risk and recommends protection measures."]],missions:["Classify a fictional signal threat.","Audit a simulated access failure.","Choose a safe continuity response."]},
+operations:{code:"OPS",name:"Continuity Operations",summary:"Maintains power, transport, healthcare, and communications.",jobs:[["Infrastructure Coordinator","Coordinates essential systems during major disruption."],["Emergency Systems Technician","Restores simulated civic services."],["Restoration Planner","Builds plans designed to prevent another collapse."]],missions:["Rank three services by restoration priority.","Select a backup system route.","Propose one eighth-day safeguard."]},
+information:{code:"INF",name:"Public Information",summary:"Maintains public confidence through verified history and messaging.",jobs:[["Civic Communications Officer","Turns updates into calm public guidance."],["Historical Records Curator","Maintains approved catastrophe records."],["Public Confidence Analyst","Studies messaging that may weaken civic trust."]],missions:["Write a calm outage statement.","Summarize the official restoration account.","Identify language that may cause panic."]},
+identity:{code:"IDA",name:"Identity Administration",summary:"Protects civic records, verification, and service access.",jobs:[["Citizen Records Specialist","Reviews conflicting identity information."],["Verification Officer","Confirms simulated credentials."],["Access Authorization Agent","Matches permissions to verified roles."]],missions:["Resolve a fictional record conflict.","Verify a simulated civic ID.","Choose minimum required permissions."]},
+research:{code:"RND",name:"Continuity Research",summary:"Develops predictive systems and resilience tools.",jobs:[["Predictive Systems Analyst","Studies patterns that may signal future failure."],["Continuity Engineer","Designs resilient fictional systems."],["Behavioral Risk Researcher","Studies public behavior during uncertainty."]],missions:["Choose a failure indicator.","Design one resilience tool.","Predict response to conflicting history."]}
+};
+const Q=[
+["A hospital network suddenly fails.",[["Stabilize essential services.",["operations","security"]],["Investigate the access pattern.",["security","research"]],["Issue calm public guidance.",["information","operations"]]]],
+["Two identity records conflict.",[["Preserve both and investigate.",["identity","research"]],["Check for unauthorized changes.",["security","identity"]],["Choose the approved public version.",["information","identity"]]]],
+["A historical claim spreads quickly.",[["Audit the evidence.",["research","security"]],["Issue a holding statement.",["information","operations"]],["Assess which systems panic may affect.",["operations","information"]]]],
+["A transport grid may fail.",[["Move traffic to backups.",["operations","research"]],["Review access controls.",["security","identity"]],["Verify operator authorization.",["identity","security"]]]],
+["Which duty matters most?",[["Keep services working.",["operations","research"]],["Protect people from hidden threats.",["security","identity"]],["Help people understand events.",["information","operations"]]]],
+["What do you notice first?",[["Contradictions in records.",["identity","research"]],["Weaknesses in systems.",["research","operations"]],["Messages that influence behavior.",["information","security"]]]]
+];
+const KEY="meridianCivicV1",R=[["PROVISIONAL",0],["VERIFIED CITIZEN",300],["CIVIC SPECIALIST",700],["CONTINUITY OFFICER",1200]];
+const departments=document.getElementById("departments"),questions=document.getElementById("questions"),assessment=document.getElementById("assessment"),dashboard=document.getElementById("dashboard"),toast=document.getElementById("toast");
+departments.innerHTML=Object.values(D).map(d=>`<article class="card"><div class="tag">${d.code}</div><h3>${d.name}</h3><p>${d.summary}</p><ul>${d.jobs.map(j=>`<li>${j[0]}</li>`).join("")}</ul></article>`).join("");
+questions.innerHTML=Q.map((q,i)=>`<fieldset><legend>${String(i+1).padStart(2,"0")} // ${q[0]}</legend>${q[1].map((c,j)=>`<label class="choice"><input required type="radio" name="q${i}" value="${j}">${c[0]}</label>`).join("")}</fieldset>`).join("");
+function note(t){toast.textContent=t;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),1800)}
+function save(p){localStorage.setItem(KEY,JSON.stringify(p))}function load(){try{return JSON.parse(localStorage.getItem(KEY)||"null")}catch{return null}}
+function rank(xp){return [...R].reverse().find(x=>xp>=x[1])[0]}
+function render(p){const d=D[p.dept],job=d.jobs[p.job];
+citizenId.textContent=p.id;outAlias.textContent=p.alias;outDept.textContent=d.name;outJob.textContent=job[0];outRank.textContent=rank(p.xp);rankLabel.textContent=rank(p.xp);jobTitle.textContent=job[0];jobDesc.textContent=job[1];xpLabel.textContent=`${p.xp} / 300 trust points`;bar.style.width=Math.min(100,p.xp/3)+"%";
+missions.innerHTML=d.missions.map((m,i)=>`<article class="card ${p.done.includes(i)?"done":""}"><div class="tag">${p.done.includes(i)?"Complete":"Assignment 0"+(i+1)}</div><h3>${m}</h3><button class="btn small ${p.done.includes(i)?"alt":""}" ${p.done.includes(i)?"disabled":""} data-m="${i}">${p.done.includes(i)?"100 points secured":"Mark Complete"}</button></article>`).join("");
+document.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{let x=load(),i=Number(b.dataset.m);if(!x.done.includes(i)){x.done.push(i);x.xp+=100;save(x);render(x);note("+100 trust points secured.")}});
+assessment.classList.add("hidden");dashboard.classList.remove("hidden")}
+startBtn.onclick=()=>{assessment.classList.remove("hidden");assessment.scrollIntoView({behavior:"smooth"})};dashBtn.onclick=()=>{const p=load();if(!p)return note("No local civic record found.");render(p);dashboard.scrollIntoView({behavior:"smooth"})};
+form.onsubmit=e=>{e.preventDefault();const data=new FormData(form),alias=document.getElementById("alias").value.toUpperCase().replace(/[^A-Z0-9 _-]/g,"").trim();if(alias.length<2)return note("Choose a valid fictional designation.");
+const scores=Object.fromEntries(Object.keys(D).map(k=>[k,0]));Q.forEach((q,i)=>q[1][Number(data.get("q"+i))][1].forEach((d,p)=>scores[d]+=p?1:3));const dept=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0],d=D[dept],job=scores[dept]%3,p={alias,dept,job,id:`M-${d.code}-${Math.floor(10000+Math.random()*90000)}`,xp:0,done:[]};save(p);render(p);dashboard.scrollIntoView({behavior:"smooth"});note(`${d.name} placement confirmed.`)};
+copyBtn.onclick=async()=>{const p=load(),d=D[p.dept],text=`MERIDIAN CIVIC CREDENTIAL\nCITIZEN: ${p.id}\nDESIGNATION: ${p.alias}\nDEPARTMENT: ${d.name}\nPOSITION: ${d.jobs[p.job][0]}\nTRUST: ${rank(p.xp)}`;try{await navigator.clipboard.writeText(text);note("Credentials copied.")}catch{note("Clipboard blocked.")}};
+resetBtn.onclick=()=>{if(confirm("Remove this device's local civic record?")){localStorage.removeItem(KEY);location.reload()}};
+reportBtn.onclick=()=>{const v=reportText.value.trim();if(v.length<4)return note("Describe a fictional anomaly.");reportOut.style.display="block";reportOut.innerHTML=`Report acknowledged locally.<br>Reference: <b>CR-${Math.floor(100000+Math.random()*900000)}</b><br>Status: queued for continuity review.`;reportText.value=""};
+const existing=load();if(existing)render(existing);
+</script>
+</body>
+</html>
