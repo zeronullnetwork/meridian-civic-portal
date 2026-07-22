@@ -3,39 +3,43 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#061426">
 <title>Meridian Systems — Civic Portal</title>
 <style>
-:root{--bg:#061426;--panel:#0b223c;--blue:#58d7ff;--white:#f4f8fb;--muted:#9eb2c4;--line:rgba(88,215,255,.28);--good:#8bffc3;--warn:#ffd67d}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
+:root{--bg:#061426;--panel:#0b223c;--blue:#58d7ff;--white:#f4f8fb;--muted:#9eb2c4;--line:rgba(88,215,255,.28);--good:#8bffc3;--warn:#ffd67d;--danger:#ff7f8f}
+*{box-sizing:border-box}html{scroll-behavior:smooth}button,input{font:inherit}
 body{margin:0;color:var(--white);background:radial-gradient(circle at top,rgba(73,190,255,.2),transparent 35rem),linear-gradient(#071b31,#020811);font-family:Inter,system-ui,sans-serif}
-.wrap{width:min(1100px,calc(100% - 24px));margin:auto;padding:16px 0 50px}
+a{color:inherit}.wrap{width:min(1100px,calc(100% - 24px));margin:auto;padding:16px 0 50px}
 .top{position:sticky;top:8px;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border:1px solid var(--line);background:rgba(4,15,28,.9);backdrop-filter:blur(12px)}
 .brand{font-weight:900;letter-spacing:.08em}.brand span{color:var(--blue)}.status{font:700 .72rem ui-monospace;color:var(--good)}
 .hero{min-height:75vh;display:grid;place-items:center;text-align:center;padding:60px 12px}.hero>div{max-width:820px}
 h1{margin:0;font-size:clamp(3rem,10vw,7rem);line-height:.92;letter-spacing:-.07em;text-transform:uppercase}h1 span{color:var(--blue)}
 .hero p{max-width:700px;margin:24px auto 0;color:#d9e5ee;line-height:1.75}
 .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}
-.btn{border:1px solid var(--blue);background:var(--blue);color:#03101d;min-height:46px;padding:0 18px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
-.btn.alt{background:transparent;color:var(--white);border-color:rgba(255,255,255,.26)}.btn.small{min-height:39px;font-size:.76rem;padding:0 13px}
-.note{margin-top:18px;color:var(--muted);font-size:.73rem;line-height:1.55}
-.section{margin-top:30px;border:1px solid var(--line);background:rgba(9,29,51,.93)}
+.btn{border:1px solid var(--blue);background:var(--blue);color:#03101d;min-height:46px;padding:0 18px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.btn.alt{background:transparent;color:var(--white);border-color:rgba(255,255,255,.26)}.btn.small{min-height:39px;font-size:.76rem;padding:0 13px}.btn:disabled{opacity:.55;cursor:not-allowed}
+.note{margin-top:18px;color:var(--muted);font-size:.73rem;line-height:1.55}.section{margin-top:30px;border:1px solid var(--line);background:rgba(9,29,51,.93)}
 .head{padding:18px;border-bottom:1px solid var(--line)}.head h2{margin:0;text-transform:uppercase;font-size:clamp(1.4rem,4vw,2.1rem)}.head p{margin:8px 0 0;color:var(--muted);line-height:1.6}
-.body{padding:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.card{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.025);padding:16px}.tag{color:var(--blue);font:700 .7rem ui-monospace;letter-spacing:.1em;text-transform:uppercase}
-.card h3{margin:9px 0 8px}.card p,.card li{color:var(--muted);font-size:.84rem;line-height:1.55}.card ul{padding-left:18px}
+.body{padding:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.025);padding:16px}
+.tag{color:var(--blue);font:700 .7rem ui-monospace;letter-spacing:.1em;text-transform:uppercase}.card h3{margin:9px 0 8px}.card p,.card li{color:var(--muted);font-size:.84rem;line-height:1.55}.card ul{padding-left:18px}
 .timeline{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.day{border:1px solid rgba(255,255,255,.11);padding:12px;min-height:160px}.day b{font-size:1.9rem;color:var(--blue)}.day h3{font-size:.86rem;margin:10px 0 7px}.day p{font-size:.72rem;color:var(--muted);line-height:1.5;margin:0}
 .metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.metric{text-align:center;border:1px solid rgba(255,255,255,.11);padding:20px}.metric strong{display:block;color:#a7ebff;font-size:2.2rem}.metric span{font-size:.72rem;color:var(--muted);text-transform:uppercase}
 fieldset{border:1px solid rgba(255,255,255,.12);margin:0 0 14px;padding:14px}legend{font-weight:900;padding:0 6px}.choice{display:block;border:1px solid rgba(255,255,255,.12);padding:11px;margin-top:8px;color:var(--muted)}.choice input{margin-right:8px}
 input[type=text]{width:100%;padding:13px;background:#03101d;border:1px solid var(--blue);color:white}.hidden{display:none!important}
 .credential{grid-column:span 2;border:1px solid var(--blue);padding:18px;background:rgba(88,215,255,.055)}.citizen{font:900 clamp(1.5rem,5vw,2.5rem) ui-monospace;color:#a7ebff;word-break:break-word}
-.info{display:grid;grid-template-columns:130px 1fr;gap:8px;margin-top:16px}.info div:nth-child(odd){color:var(--muted)}
-.progress{height:10px;border:1px solid rgba(255,255,255,.2);margin-top:18px}.bar{height:100%;width:0;background:linear-gradient(90deg,#277ea6,var(--blue))}.row{display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted);margin-top:7px}
+.info{display:grid;grid-template-columns:130px 1fr;gap:8px;margin-top:16px}.info div:nth-child(odd){color:var(--muted)}.progress{height:10px;border:1px solid rgba(255,255,255,.2);margin-top:18px}.bar{height:100%;width:0;background:linear-gradient(90deg,#277ea6,var(--blue))}.row{display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted);margin-top:7px}
 .done{border-color:rgba(139,255,195,.5)!important}.report{display:none;margin-top:12px;border:1px solid rgba(139,255,195,.4);color:var(--good);padding:12px}
-.archive{font: .76rem/1.75 ui-monospace;color:#9ab0c1;border:1px solid rgba(255,255,255,.1);padding:16px;background:rgba(0,0,0,.18)}.redact{display:inline-block;width:95px;height:.8em;background:#02070c}
-.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;background:#061426;border:1px solid var(--blue);padding:11px 15px;transition:.2s;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}
+.archive{font:.76rem/1.9 ui-monospace;color:#9ab0c1;border:1px solid rgba(255,255,255,.1);padding:16px;background:rgba(0,0,0,.18)}.redact{display:inline-block;width:95px;height:.8em;background:#02070c}
+.record-button{width:100%;margin-top:3px;padding:11px 10px;border:1px solid rgba(255,127,143,.25);background:rgba(255,127,143,.035);color:#a9bdcb;text-align:left;cursor:pointer;font:.76rem/1.5 ui-monospace}.record-button:hover,.record-button:focus{border-color:rgba(255,127,143,.65);outline:none}.record-button .restricted{color:var(--danger)}
+.modal{position:fixed;inset:0;background:rgba(0,7,14,.82);z-index:50;display:grid;place-items:center;padding:18px}.modal-panel{width:min(680px,100%);border:1px solid var(--blue);background:#061426;box-shadow:0 20px 80px rgba(0,0,0,.55)}
+.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);font:800 .78rem ui-monospace;letter-spacing:.07em}.close{background:transparent;border:0;color:var(--white);font-size:1.25rem;cursor:pointer}
+.terminal{padding:18px;background:linear-gradient(rgba(88,215,255,.025) 1px,transparent 1px),#020b14;background-size:100% 25px;font: .8rem/1.75 ui-monospace;color:#9eb2c4}.terminal strong{color:#a7ebff}.terminal .denied{color:var(--danger)}
+.pass-row{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:15px}.pass-row .btn{min-width:140px}.clue{border-left:3px solid var(--warn);padding:10px 12px;margin:15px 0;color:#e9d49e;background:rgba(255,214,125,.05)}
+.broadcast{display:none;margin-top:18px;border:1px solid rgba(139,255,195,.4);padding:16px;background:rgba(139,255,195,.04)}.broadcast.show{display:block}.broadcast h3{color:var(--good);margin:0 0 8px}.broadcast p{color:#bdd0d9;line-height:1.6}.broadcast .btn{margin-top:7px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;background:#061426;border:1px solid var(--blue);padding:11px 15px;transition:.2s;z-index:70;max-width:calc(100% - 30px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
 footer{text-align:center;color:#71889b;font-size:.68rem;line-height:1.6;margin-top:28px}
 @media(max-width:850px){.grid{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:1fr 1fr}.metric-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.grid,.timeline,.metric-grid{grid-template-columns:1fr}.credential{grid-column:span 1}.info{grid-template-columns:1fr}.status{display:none}}
+@media(max-width:560px){.grid,.timeline,.metric-grid{grid-template-columns:1fr}.credential{grid-column:span 1}.info{grid-template-columns:1fr}.status{display:none}.pass-row{grid-template-columns:1fr}.pass-row .btn{width:100%}}
 </style>
 </head>
 <body>
@@ -47,7 +51,7 @@ footer{text-align:center;color:#71889b;font-size:.68rem;line-height:1.6;margin-t
 <h1>The future remains <span>online.</span></h1>
 <p>Meridian restored communication, identity, healthcare, transportation, and financial continuity. Together, we ensure civilization never faces an eighth day.</p>
 <div class="actions"><button class="btn" id="startBtn">Begin Civic Assessment</button><button class="btn alt" id="dashBtn">Open Dashboard</button></div>
-<div class="note">Use a fictional designation only. This V1 stores progress locally on your device.</div>
+<div class="note">Use a fictional designation only. Progress is stored locally on this device.</div>
 </div></section>
 
 <section class="section"><div class="head"><h2>The official restoration record</h2><p>In the year 23XX, the Seven-Day Catastrophe disabled the systems civilization depended on.</p></div>
@@ -91,19 +95,41 @@ footer{text-align:center;color:#71889b;font-size:.68rem;line-height:1.6;margin-t
 <input id="reportText" type="text" maxlength="140" placeholder="Describe a fictional anomaly"><div class="actions" style="justify-content:flex-start"><button class="btn" id="reportBtn">Submit Report</button></div><div class="report" id="reportOut"></div>
 </div></section>
 
-<section class="section"><div class="head"><h2>Public archive access</h2><p>Approved records are available for civic-confidence purposes.</p></div><div class="body">
+<section class="section" id="archiveSection"><div class="head"><h2>Public archive access</h2><p>Approved records are available for civic-confidence purposes.</p></div><div class="body">
 <div class="archive"><b>RESTORATION ARCHIVE INDEX</b><br>
 RECORD_01 — VERIFIED // COMMUNICATION FAILURE<br>
 RECORD_02 — VERIFIED // FINANCIAL LOCKDOWN<br>
 RECORD_03 — VERIFIED // IDENTITY COLLAPSE<br>
 RECORD_04 — VERIFIED // INFRASTRUCTURE FAILURE<br>
 RECORD_05 — VERIFIED // GOVERNMENT FRAGMENTATION<br>
-RECORD_06 — VERIFIED // GLOBAL RESTORATION<br>
-RECORD_07 — <span class="redact"></span> // PUBLIC ACCESS RESTRICTED<br><br>
-Restriction authority: <b>M-0</b><br>Reason: continuity confidence preservation.</div>
+RECORD_06 — VERIFIED // GLOBAL RESTORATION
+<button class="record-button" id="record07" type="button">RECORD_07 — <span class="redact"></span> // <span class="restricted">PUBLIC ACCESS RESTRICTED</span></button>
+<br>Restriction authority: <b>M-0</b><br>Reason: continuity confidence preservation.<br><span class="note">Authorized personnel may request a public-access review.</span></div>
 </div></section>
 
-<footer><b>MERIDIAN SYSTEMS is a fictional interactive story.</b><br>This V1 uses browser storage only and sends no information to a server.</footer>
+<footer><b>MERIDIAN SYSTEMS is a fictional interactive story.</b><br>This portal uses browser storage only and sends no information to a server.</footer>
+</div>
+
+<div class="modal hidden" id="archiveModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-panel">
+    <div class="modal-head"><span id="modalTitle">MERIDIAN ARCHIVE ACCESS // RECORD_07</span><button class="close" id="closeModal" aria-label="Close">×</button></div>
+    <div class="terminal">
+      <strong>AUTHORITY:</strong> M-0<br>
+      <strong>PUBLIC STATUS:</strong> RESTRICTED<br>
+      <strong>ACCESS ROUTE:</strong> HISTORICAL VERIFICATION<br>
+      <div class="clue">The key is hidden in the day they claim the world requested them.</div>
+      <div class="pass-row">
+        <input id="archivePasscode" type="text" maxlength="40" autocomplete="off" placeholder="Enter verification term">
+        <button class="btn" id="verifyPasscode" type="button">Verify</button>
+      </div>
+      <div id="accessMessage" class="note">Public-access review awaiting verification.</div>
+      <div class="broadcast" id="broadcastDirectory">
+        <h3>PARTIAL ACCESS RESTORED</h3>
+        <p><strong>PUBLIC BROADCAST DIRECTORY LOCATED.</strong><br>Inspect Meridian's pinned Restoration record. Return to your point of origin with the phrase used to justify continued authority.</p>
+        <a class="btn" href="https://www.tiktok.com/@meridian.global2?_r=1&amp;_t=ZP-98F53iJMBJO" target="_blank" rel="noopener">Open Official Broadcast Channel</a>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -123,24 +149,35 @@ const Q=[
 ["Which duty matters most?",[["Keep services working.",["operations","research"]],["Protect people from hidden threats.",["security","identity"]],["Help people understand events.",["information","operations"]]]],
 ["What do you notice first?",[["Contradictions in records.",["identity","research"]],["Weaknesses in systems.",["research","operations"]],["Messages that influence behavior.",["information","security"]]]]
 ];
-const KEY="meridianCivicV1",R=[["PROVISIONAL",0],["VERIFIED CITIZEN",300],["CIVIC SPECIALIST",700],["CONTINUITY OFFICER",1200]];
-const departments=document.getElementById("departments"),questions=document.getElementById("questions"),assessment=document.getElementById("assessment"),dashboard=document.getElementById("dashboard"),toast=document.getElementById("toast");
+const KEY="meridianCivicV1",ACCESS_KEY="meridianRecord07Access",R=[["PROVISIONAL",0],["VERIFIED CITIZEN",300],["CIVIC SPECIALIST",700],["CONTINUITY OFFICER",1200]];
+const $=id=>document.getElementById(id);
+const departments=$("departments"),questions=$("questions"),assessment=$("assessment"),dashboard=$("dashboard"),toast=$("toast");
 departments.innerHTML=Object.values(D).map(d=>`<article class="card"><div class="tag">${d.code}</div><h3>${d.name}</h3><p>${d.summary}</p><ul>${d.jobs.map(j=>`<li>${j[0]}</li>`).join("")}</ul></article>`).join("");
 questions.innerHTML=Q.map((q,i)=>`<fieldset><legend>${String(i+1).padStart(2,"0")} // ${q[0]}</legend>${q[1].map((c,j)=>`<label class="choice"><input required type="radio" name="q${i}" value="${j}">${c[0]}</label>`).join("")}</fieldset>`).join("");
-function note(t){toast.textContent=t;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),1800)}
+function note(text){toast.textContent=text;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),2000)}
 function save(p){localStorage.setItem(KEY,JSON.stringify(p))}function load(){try{return JSON.parse(localStorage.getItem(KEY)||"null")}catch{return null}}
 function rank(xp){return [...R].reverse().find(x=>xp>=x[1])[0]}
 function render(p){const d=D[p.dept],job=d.jobs[p.job];
-citizenId.textContent=p.id;outAlias.textContent=p.alias;outDept.textContent=d.name;outJob.textContent=job[0];outRank.textContent=rank(p.xp);rankLabel.textContent=rank(p.xp);jobTitle.textContent=job[0];jobDesc.textContent=job[1];xpLabel.textContent=`${p.xp} / 300 trust points`;bar.style.width=Math.min(100,p.xp/3)+"%";
-missions.innerHTML=d.missions.map((m,i)=>`<article class="card ${p.done.includes(i)?"done":""}"><div class="tag">${p.done.includes(i)?"Complete":"Assignment 0"+(i+1)}</div><h3>${m}</h3><button class="btn small ${p.done.includes(i)?"alt":""}" ${p.done.includes(i)?"disabled":""} data-m="${i}">${p.done.includes(i)?"100 points secured":"Mark Complete"}</button></article>`).join("");
+$("citizenId").textContent=p.id;$("outAlias").textContent=p.alias;$("outDept").textContent=d.name;$("outJob").textContent=job[0];$("outRank").textContent=rank(p.xp);$("rankLabel").textContent=rank(p.xp);$("jobTitle").textContent=job[0];$("jobDesc").textContent=job[1];$("xpLabel").textContent=`${p.xp} / 300 trust points`;$("bar").style.width=Math.min(100,p.xp/3)+"%";
+$("missions").innerHTML=d.missions.map((m,i)=>`<article class="card ${p.done.includes(i)?"done":""}"><div class="tag">${p.done.includes(i)?"Complete":"Assignment 0"+(i+1)}</div><h3>${m}</h3><button class="btn small ${p.done.includes(i)?"alt":""}" ${p.done.includes(i)?"disabled":""} data-m="${i}">${p.done.includes(i)?"100 points secured":"Mark Complete"}</button></article>`).join("");
 document.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{let x=load(),i=Number(b.dataset.m);if(!x.done.includes(i)){x.done.push(i);x.xp+=100;save(x);render(x);note("+100 trust points secured.")}});
 assessment.classList.add("hidden");dashboard.classList.remove("hidden")}
-startBtn.onclick=()=>{assessment.classList.remove("hidden");assessment.scrollIntoView({behavior:"smooth"})};dashBtn.onclick=()=>{const p=load();if(!p)return note("No local civic record found.");render(p);dashboard.scrollIntoView({behavior:"smooth"})};
-form.onsubmit=e=>{e.preventDefault();const data=new FormData(form),alias=document.getElementById("alias").value.toUpperCase().replace(/[^A-Z0-9 _-]/g,"").trim();if(alias.length<2)return note("Choose a valid fictional designation.");
+$("startBtn").onclick=()=>{assessment.classList.remove("hidden");assessment.scrollIntoView({behavior:"smooth"})};
+$("dashBtn").onclick=()=>{const p=load();if(!p)return note("No local civic record found.");render(p);dashboard.scrollIntoView({behavior:"smooth"})};
+$("form").onsubmit=e=>{e.preventDefault();const data=new FormData(e.target),alias=$("alias").value.toUpperCase().replace(/[^A-Z0-9 _-]/g,"").trim();if(alias.length<2)return note("Choose a valid fictional designation.");
 const scores=Object.fromEntries(Object.keys(D).map(k=>[k,0]));Q.forEach((q,i)=>q[1][Number(data.get("q"+i))][1].forEach((d,p)=>scores[d]+=p?1:3));const dept=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0],d=D[dept],job=scores[dept]%3,p={alias,dept,job,id:`M-${d.code}-${Math.floor(10000+Math.random()*90000)}`,xp:0,done:[]};save(p);render(p);dashboard.scrollIntoView({behavior:"smooth"});note(`${d.name} placement confirmed.`)};
-copyBtn.onclick=async()=>{const p=load(),d=D[p.dept],text=`MERIDIAN CIVIC CREDENTIAL\nCITIZEN: ${p.id}\nDESIGNATION: ${p.alias}\nDEPARTMENT: ${d.name}\nPOSITION: ${d.jobs[p.job][0]}\nTRUST: ${rank(p.xp)}`;try{await navigator.clipboard.writeText(text);note("Credentials copied.")}catch{note("Clipboard blocked.")}};
-resetBtn.onclick=()=>{if(confirm("Remove this device's local civic record?")){localStorage.removeItem(KEY);location.reload()}};
-reportBtn.onclick=()=>{const v=reportText.value.trim();if(v.length<4)return note("Describe a fictional anomaly.");reportOut.style.display="block";reportOut.innerHTML=`Report acknowledged locally.<br>Reference: <b>CR-${Math.floor(100000+Math.random()*900000)}</b><br>Status: queued for continuity review.`;reportText.value=""};
+$("copyBtn").onclick=async()=>{const p=load(),d=D[p.dept],text=`MERIDIAN CIVIC CREDENTIAL\nCITIZEN: ${p.id}\nDESIGNATION: ${p.alias}\nDEPARTMENT: ${d.name}\nPOSITION: ${d.jobs[p.job][0]}\nTRUST: ${rank(p.xp)}`;try{await navigator.clipboard.writeText(text);note("Credentials copied.")}catch{note("Clipboard blocked.")}};
+$("resetBtn").onclick=()=>{if(confirm("Remove this device's local civic record?")){localStorage.removeItem(KEY);location.reload()}};
+$("reportBtn").onclick=()=>{const v=$("reportText").value.trim();if(v.length<4)return note("Describe a fictional anomaly.");$("reportOut").style.display="block";$("reportOut").innerHTML=`Report acknowledged locally.<br>Reference: <b>CR-${Math.floor(100000+Math.random()*900000)}</b><br>Status: queued for continuity review.`;$("reportText").value=""};
+
+function openArchive(){$("archiveModal").classList.remove("hidden");$("archivePasscode").focus();if(localStorage.getItem(ACCESS_KEY)==="granted")grantAccess(false)}
+function closeArchive(){$("archiveModal").classList.add("hidden")}
+function grantAccess(showNote=true){localStorage.setItem(ACCESS_KEY,"granted");$("broadcastDirectory").classList.add("show");$("accessMessage").textContent="Verification accepted. Restricted public directory partially restored.";$("accessMessage").style.color="var(--good)";$("archivePasscode").disabled=true;$("verifyPasscode").disabled=true;if(showNote)note("PARTIAL ACCESS RESTORED")}
+$("record07").onclick=openArchive;$("closeModal").onclick=closeArchive;
+$("archiveModal").addEventListener("click",e=>{if(e.target===$("archiveModal"))closeArchive()});
+$("verifyPasscode").onclick=()=>{const code=$("archivePasscode").value.toUpperCase().replace(/[^A-Z0-9]/g,"");if(code!=="REQUEST"){$("accessMessage").textContent="ACCESS DENIED // SOURCE TERM NOT RECOGNIZED";$("accessMessage").style.color="var(--danger)";return note("Verification denied.")}grantAccess(true)};
+$("archivePasscode").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("verifyPasscode").click()}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeArchive()});
 const existing=load();if(existing)render(existing);
 </script>
 </body>
